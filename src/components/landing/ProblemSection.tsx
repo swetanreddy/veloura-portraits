@@ -1,4 +1,5 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import PointerFollower from "@/components/ui/PointerFollower";
 
 const concerns = [
   "I never know what to do with my hands or expression.",
@@ -32,30 +33,34 @@ const ProblemSection = () => {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
           <ScrollReveal>
-            <div className="card-glass p-8 md:p-10">
-              <p className="label-uppercase text-foreground/50">What clients say before booking</p>
-              <div className="mt-8 space-y-5">
-                {concerns.map((item) => (
-                  <div key={item} className="border-b border-white/8 pb-5 text-lg leading-8 text-foreground/86">
-                    {item}
-                  </div>
-                ))}
+            <PointerFollower className="rounded-[30px]">
+              <div className="card-glass p-8 md:p-10">
+                <p className="label-uppercase text-foreground/50">What clients say before booking</p>
+                <div className="mt-8 space-y-5">
+                  {concerns.map((item) => (
+                    <div key={item} className="border-b border-white/8 pb-5 text-lg leading-8 text-foreground/86">
+                      {item}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            </PointerFollower>
           </ScrollReveal>
 
           <ScrollReveal delay={0.15}>
-            <div className="card-elevated p-8 md:p-10">
-              <p className="label-uppercase text-accent">How the session answers it</p>
-              <div className="mt-8 space-y-5">
-                {studioResponses.map((item) => (
-                  <div key={item} className="flex gap-4 border-b border-white/8 pb-5">
-                    <div className="mt-2 h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_18px_rgba(199,122,90,0.5)]" />
-                    <p className="text-lg leading-8 text-foreground/86">{item}</p>
-                  </div>
-                ))}
+            <PointerFollower className="rounded-[30px]">
+              <div className="card-elevated p-8 md:p-10">
+                <p className="label-uppercase text-accent">How the session answers it</p>
+                <div className="mt-8 space-y-5">
+                  {studioResponses.map((item) => (
+                    <div key={item} className="flex gap-4 border-b border-white/8 pb-5">
+                      <div className="mt-2 h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_18px_rgba(199,122,90,0.5)]" />
+                      <p className="text-lg leading-8 text-foreground/86">{item}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            </PointerFollower>
           </ScrollReveal>
         </div>
       </div>

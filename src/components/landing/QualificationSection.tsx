@@ -25,21 +25,21 @@ const QualificationSection = () => {
     <section className="section-padding bg-gradient-premium">
       <div className="container-narrow">
         <ScrollReveal>
-          <div className="grid gap-8 lg:grid-cols-[0.85fr_1fr] lg:items-end">
+          <div className="grid gap-6 lg:grid-cols-[0.85fr_1fr] lg:items-end">
             <div>
               <span className="label-uppercase text-accent">Who We Photograph</span>
-              <h2 className="heading-section mt-5 max-w-xl text-balance text-foreground">
+              <h2 className="heading-section mt-4 max-w-xl text-balance text-[clamp(2.1rem,3.9vw,3.55rem)] leading-[1.01] text-foreground">
                 One studio. Three portrait tracks. The same cinematic standard across all of them.
               </h2>
             </div>
-            <p className="body-base max-w-xl">
+            <p className="body-base max-w-lg lg:justify-self-end">
               Every booking begins with intent: where the photos will live, how you want to feel in them, and what
               kind of presence they need to carry after the session is over.
             </p>
           </div>
         </ScrollReveal>
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {sessions.map((session, index) => (
             <ScrollReveal key={session.title} delay={0.12 * index}>
               <TiltCard className="h-full" glareEnabled={false} tiltAmount={8}>

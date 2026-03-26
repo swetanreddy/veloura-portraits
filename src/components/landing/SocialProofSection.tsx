@@ -1,5 +1,6 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import TiltCard from "@/components/3d/TiltCard";
+import { Star } from "lucide-react";
 import portraitImage from "@/assets/hero-option-1.jpg";
 import studioImage from "@/assets/hero-studio-new.jpg";
 import commercialImage from "@/assets/hero-commercial.jpg";
@@ -32,21 +33,21 @@ const SocialProofSection = () => {
     <section className="section-padding" id="portfolio">
       <div className="container-narrow">
         <ScrollReveal>
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1fr] lg:items-end">
+          <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
             <div>
               <span className="label-uppercase text-accent">Selected Frames</span>
-              <h2 className="heading-section mt-5 text-balance text-foreground">
+              <h2 className="heading-section mt-4 max-w-[15ch] text-balance text-[clamp(2.1rem,3.9vw,3.55rem)] leading-[1.01] text-foreground">
                 A portrait library with enough range to work everywhere your image needs to live.
               </h2>
             </div>
-            <p className="body-base max-w-xl">
+            <p className="body-base max-w-lg lg:justify-self-end">
               The session is built to deliver both presence and flexibility: hero portraits, tighter crops, quieter
               expressions, and frames that can survive print, web, or a living room wall.
             </p>
           </div>
         </ScrollReveal>
 
-        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-[1.15fr_0.85fr_0.85fr]">
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-[1.15fr_0.85fr_0.85fr]">
           {gallery.map((item, index) => (
             <ScrollReveal key={item.title} delay={0.12 * index}>
               <TiltCard className="h-full" glareEnabled={false} tiltAmount={6}>
@@ -67,7 +68,7 @@ const SocialProofSection = () => {
           ))}
         </div>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-[0.85fr_1fr]">
+        <div className="mt-14 grid gap-8 lg:grid-cols-[0.85fr_1fr]">
           <ScrollReveal>
             <div className="card-elevated p-8 md:p-10">
               <p className="label-uppercase text-accent">Studio numbers</p>
@@ -86,7 +87,12 @@ const SocialProofSection = () => {
             {testimonials.map((item, index) => (
               <ScrollReveal key={item.name} delay={0.12 * (index + 1)}>
                 <div className="card-glass p-8 md:p-10">
-                  <p className="text-xl leading-9 text-foreground/88">&ldquo;{item.quote}&rdquo;</p>
+                  <div className="flex items-center gap-2 text-accent/90">
+                    {Array.from({ length: 5 }).map((_, starIndex) => (
+                      <Star key={`${item.name}-${starIndex}`} className="h-4 w-4 fill-current" />
+                    ))}
+                  </div>
+                  <p className="mt-4 text-xl leading-9 text-foreground/88">&ldquo;{item.quote}&rdquo;</p>
                   <p className="mt-6 text-sm uppercase tracking-[0.24em] text-accent">{item.name}</p>
                 </div>
               </ScrollReveal>
