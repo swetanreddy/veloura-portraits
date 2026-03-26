@@ -1,33 +1,48 @@
 import { motion } from "framer-motion";
+import commercialImage from "@/assets/hero-commercial.jpg";
+import portraitImage from "@/assets/hero-portrait.jpg";
+import proofImage from "@/assets/hero-option-1.jpg";
+import studioImage from "@/assets/hero-studio-new.jpg";
 
 interface ContactSheetStack3DProps {
   className?: string;
 }
 
 const sheets = [
-  { x: 20, y: 24, z: 4, rotate: -10, tone: "rgba(52, 58, 71, 0.88)", edge: "rgba(85, 92, 108, 0.28)" },
-  { x: 34, y: 12, z: 16, rotate: -4, tone: "rgba(42, 37, 32, 0.92)", edge: "rgba(155, 117, 86, 0.26)" },
-  { x: 48, y: 0, z: 30, rotate: 4, tone: "rgba(54, 58, 68, 0.96)", edge: "rgba(196, 130, 92, 0.42)" },
+  { x: 0,   y: 50, z: 0,  rotate: -10, tone: "rgba(52, 58, 71, 0.88)", edge: "rgba(85, 92, 108, 0.28)" },
+  { x: 50,  y: 25, z: 20, rotate: -4,  tone: "rgba(42, 37, 32, 0.92)", edge: "rgba(155, 117, 86, 0.26)" },
+  { x: 100, y: 0,  z: 40, rotate: 4,   tone: "rgba(54, 58, 68, 0.96)", edge: "rgba(196, 130, 92, 0.42)" },
+];
+
+const CARD_W = 115;
+const CARD_H = 140;
+
+const proofSets = [
+  [portraitImage, studioImage, commercialImage, proofImage],
+  [studioImage, proofImage, portraitImage, commercialImage],
+  [commercialImage, portraitImage, studioImage, proofImage],
 ];
 
 const ContactSheetStack3D = ({ className = "" }: ContactSheetStack3DProps) => {
   return (
-    <div className={`relative h-[170px] w-[210px] ${className}`} style={{ perspective: "1400px" }}>
+    <div className={`relative h-[220px] w-[280px] ${className}`} style={{ perspective: "1400px" }}>
       <motion.div
         className="absolute inset-0"
         animate={{ rotateY: [0, 4, 0, -4, 0], rotateX: [0, -2, 0, 2, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         style={{ transformStyle: "preserve-3d" }}
       >
-        <div className="absolute left-0 top-0 rounded-full border border-[#c4825c]/20 bg-[#181311]/84 px-3 py-1 text-[9px] uppercase tracking-[0.28em] text-[#cf9a72]">
+        <div className="absolute -top-1 left-0 z-10 rounded-full border border-[#c4825c]/20 bg-[#181311]/84 px-3 py-1 text-[9px] uppercase tracking-[0.28em] text-[#cf9a72]">
           Final selects
         </div>
 
         {sheets.map((sheet, index) => (
           <motion.div
             key={index}
-            className="absolute left-0 top-0 h-[118px] w-[96px]"
+            className="absolute left-0 top-0"
             style={{
+              width: CARD_W,
+              height: CARD_H,
               marginLeft: sheet.x,
               marginTop: sheet.y,
               transformStyle: "preserve-3d",
@@ -37,7 +52,7 @@ const ContactSheetStack3D = ({ className = "" }: ContactSheetStack3DProps) => {
             transition={{ duration: 4.8 + index, repeat: Infinity, ease: "easeInOut" }}
           >
             <div
-              className="absolute inset-0 rounded-[16px] border p-2.5"
+              className="absolute inset-0 rounded-[16px] border p-3"
               style={{
                 transform: "translateZ(6px)",
                 background: `linear-gradient(180deg, rgba(239,227,210,0.08), rgba(12,11,10,0.82)), ${sheet.tone}`,
@@ -50,23 +65,32 @@ const ContactSheetStack3D = ({ className = "" }: ContactSheetStack3DProps) => {
                 <span>{String(index + 1).padStart(2, "0")}</span>
               </div>
 
-              <div className="mt-2.5 rounded-[10px] border border-[#d3c3b2]/8 bg-[linear-gradient(180deg,rgba(239,227,210,0.08),rgba(20,20,20,0.02))] p-1.5">
+              <div className="mt-2 rounded-[10px] border border-[#d3c3b2]/8 bg-[linear-gradient(180deg,rgba(239,227,210,0.08),rgba(20,20,20,0.02))] p-1.5">
                 <div className="grid grid-cols-2 gap-1.5">
-                  {Array.from({ length: 4 }).map((_, cellIndex) => (
+                  {proofSets[index].map((image, cellIndex) => (
                     <div
                       key={cellIndex}
-                      className={`h-8 rounded-[7px] border ${
+                      className={`relative h-10 overflow-hidden rounded-[7px] border ${
                         index === 2 && cellIndex === 1
-                          ? "border-[#c4825c]/35 bg-[linear-gradient(180deg,rgba(196,130,92,0.22),rgba(55,44,36,0.18))]"
-                          : "border-[#d3c3b2]/6 bg-[linear-gradient(180deg,rgba(239,227,210,0.08),rgba(61,67,81,0.14))]"
+                          ? "border-[#c4825c]/35"
+                          : "border-[#d3c3b2]/6"
                       }`}
-                    />
+                    >
+                      <img alt="" className="h-full w-full object-cover" src={image} />
+                      <div
+                        className={`absolute inset-0 ${
+                          index === 2 && cellIndex === 1
+                            ? "bg-[linear-gradient(180deg,rgba(196,130,92,0.16),rgba(55,44,36,0.12))]"
+                            : "bg-[linear-gradient(180deg,rgba(16,14,12,0.18),rgba(16,14,12,0.44))]"
+                        }`}
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
 
               {index === 2 && (
-                <div className="mt-2 flex items-center justify-between rounded-full border border-[#c4825c]/24 bg-[#201915]/72 px-2.5 py-1 text-[8px] uppercase tracking-[0.2em] text-[#c4825c]">
+                <div className="mt-2.5 flex items-center justify-between rounded-full border border-[#c4825c]/24 bg-[#201915]/72 px-2.5 py-1 text-[8px] uppercase tracking-[0.2em] text-[#c4825c]">
                   <span>Hero crop</span>
                   <span>02</span>
                 </div>
@@ -76,8 +100,8 @@ const ContactSheetStack3D = ({ className = "" }: ContactSheetStack3DProps) => {
             <div
               className="absolute left-0 top-0 rounded-[16px] bg-[linear-gradient(180deg,rgba(61,67,81,0.08),rgba(0,0,0,0.24))]"
               style={{
-                width: 96,
-                height: 118,
+                width: CARD_W,
+                height: CARD_H,
                 transform: "translateZ(-6px)",
                 opacity: 0.4,
               }}
@@ -85,9 +109,9 @@ const ContactSheetStack3D = ({ className = "" }: ContactSheetStack3DProps) => {
             <div
               className="absolute left-0 top-0 bg-[linear-gradient(180deg,rgba(191,154,126,0.10),rgba(46,37,31,0.18))]"
               style={{
-                width: 96,
+                width: CARD_W,
                 height: 12,
-                transform: "rotateX(90deg) translateZ(106px)",
+                transform: `rotateX(90deg) translateZ(${CARD_H - 12}px)`,
                 transformOrigin: "top left",
               }}
             />
@@ -95,8 +119,8 @@ const ContactSheetStack3D = ({ className = "" }: ContactSheetStack3DProps) => {
               className="absolute left-0 top-0 bg-[linear-gradient(90deg,rgba(61,67,81,0.22),rgba(0,0,0,0.26))]"
               style={{
                 width: 12,
-                height: 118,
-                transform: "rotateY(90deg) translateZ(84px)",
+                height: CARD_H,
+                transform: `rotateY(90deg) translateZ(${CARD_W - 12}px)`,
                 transformOrigin: "top left",
               }}
             />

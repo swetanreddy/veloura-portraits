@@ -1,4 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import commercialImage from "@/assets/hero-commercial.jpg";
+import portraitImage from "@/assets/hero-portrait.jpg";
+import studioImage from "@/assets/hero-studio-new.jpg";
 
 interface PortraitPanels3DProps {
   className?: string;
@@ -9,6 +12,8 @@ const blocks = [
   { x: 8, y: -10, z: 52, rotate: -6, height: 196, width: 128, depth: 20, tone: "rgba(62,70,84,0.20)" },
   { x: 68, y: 34, z: 12, rotate: 14, height: 168, width: 110, depth: 16, tone: "rgba(214,182,156,0.08)" },
 ];
+
+const blockImages = [commercialImage, portraitImage, studioImage];
 
 const PortraitPanels3D = ({ className = "" }: PortraitPanels3DProps) => {
   const pointerX = useMotionValue(0.5);
@@ -69,7 +74,10 @@ const PortraitPanels3D = ({ className = "" }: PortraitPanels3DProps) => {
                 <span>{index === 1 ? "editorial" : index === 0 ? "hero crop" : "print trim"}</span>
                 <span>{index === 1 ? "select" : index === 0 ? "waist up" : "8 x 10"}</span>
               </div>
-              <div className="absolute left-4 right-4 top-12 h-[58%] rounded-[16px] border border-[#d3c3b2]/8 bg-[radial-gradient(circle_at_top,rgba(239,227,210,0.12),transparent_36%),linear-gradient(160deg,rgba(48,54,66,0.92),rgba(196,130,92,0.10),rgba(12,11,10,0.98))]" />
+              <div className="absolute left-4 right-4 top-12 h-[58%] overflow-hidden rounded-[16px] border border-[#d3c3b2]/8">
+                <img alt="" className="h-full w-full object-cover" src={blockImages[index]} />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(239,227,210,0.12),transparent_36%),linear-gradient(180deg,rgba(16,14,12,0.08),rgba(12,11,10,0.52))]" />
+              </div>
               <div className="absolute bottom-4 left-4 right-4 grid grid-cols-3 gap-2">
                 <div className="h-5 rounded-full bg-[#6b707d]/18" />
                 <div className="h-5 rounded-full bg-[#c4825c]/18" />
